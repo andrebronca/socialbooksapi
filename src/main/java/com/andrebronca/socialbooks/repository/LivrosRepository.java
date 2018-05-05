@@ -1,5 +1,9 @@
 package com.andrebronca.socialbooks.repository;
 
-public interface LivrosRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.andrebronca.socialbooks.domain.Livro;
+
+public interface LivrosRepository extends JpaRepository<Livro, Long> {
 
 }
