@@ -54,17 +54,18 @@ public class LivrosResources {
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> deletar(@PathVariable("id") Long id) {
 		try {
-			livrosRepository.delete(id);
+			livrosRepository.delete(id);	
 		} catch (EmptyResultDataAccessException e) {
-//			e.printStackTrace();
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.noContent().build();
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public void atualizar(@RequestBody Livro livro, @PathVariable("id") Long id) {
+	public ResponseEntity<Void> atualizar(@RequestBody Livro livro, @PathVariable("id") Long id) {
 		livro.setId(id);
 		livrosRepository.save(livro);
+		
+		return ResponseEntity.noContent().build();
 	}
 }
