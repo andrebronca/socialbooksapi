@@ -2,12 +2,24 @@ package com.andrebronca.socialbooks.domain;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+@Entity
 public class Comentario {
 
 	@JsonInclude(Include.NON_NULL)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@JsonInclude(Include.NON_NULL)
@@ -18,6 +30,11 @@ public class Comentario {
 	
 	@JsonInclude(Include.NON_NULL)
 	private Date data;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "livro_id")
+	@JsonIgnore				//evitar chamada cíclica
+	private Livro livro;
 
 	public Long getId() {
 		return id;
@@ -49,6 +66,14 @@ public class Comentario {
 
 	public void setData(Date data) {
 		this.data = data;
+	}
+
+	public Livro getLivro() {
+		return livro;
+	}
+
+	public void setLivro(Livro livro) {
+		this.livro = livro;
 	}
 	
 	
