@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -20,6 +21,7 @@ public class Autor {
 	
 	private String nome;
 	
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date nascimento;
 	
 	private String nacionalidade;
