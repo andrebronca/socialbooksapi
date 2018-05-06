@@ -50,7 +50,7 @@ public class LivrosService {
 	
 	public void atualizar(Livro livro) {
 		verificarExistencia(livro);
-		livrosRepository.save(livro);
+		livrosRepository.save(livro);	//está tendo um problema, quando passa apenas um valor, o restante fica null
 	}
 	
 	private void verificarExistencia(Livro livro) {

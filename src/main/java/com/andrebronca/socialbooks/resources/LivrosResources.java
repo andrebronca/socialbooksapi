@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -34,7 +36,7 @@ public class LivrosResources {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> salvar(@RequestBody Livro livro) {	
+	public ResponseEntity<Void> salvar(@Valid @RequestBody Livro livro) {	
 		livro = livrosService.salvar(livro);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -63,7 +65,7 @@ public class LivrosResources {
 	}
 	
 	@RequestMapping(value = "/{id}/comentarios", method = RequestMethod.POST)
-	public ResponseEntity<Void> adicionarComentario(@PathVariable("id") Long livroId, @RequestBody Comentario comentario) {
+	public ResponseEntity<Void> adicionarComentario(@Valid @PathVariable("id") Long livroId, @RequestBody Comentario comentario) {
 		livrosService.salvarComentario(livroId, comentario);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();

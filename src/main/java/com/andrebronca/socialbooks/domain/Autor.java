@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -19,11 +22,14 @@ public class Autor {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotEmpty(message="O campo nome não pode ser vazio")
 	private String nome;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
+	@NotNull(message = "A data de nascimento é obrigatória")
 	private Date nascimento;
 	
+	@NotNull(message = "Nacionalidade é obrigatório")
 	private String nacionalidade;
 	
 	@OneToMany(mappedBy = "autor")
